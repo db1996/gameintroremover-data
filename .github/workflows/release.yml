@@ -23,5 +23,5 @@ jobs:
         with:
           files: |
             data.json
-            stats.json
+            details.json
             files.zip
