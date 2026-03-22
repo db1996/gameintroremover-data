@@ -18,6 +18,12 @@ jobs:
       - name: Zip files folder
         run: zip -r files.zip files/
 
+      - name: Update zip_size in details.json
+        run: |
+          ZIP_SIZE=$(stat -c%s files.zip)
+          jq --argjson size "$ZIP_SIZE" '.zip_size = $size' details.json > details.tmp.json
+          mv details.tmp.json details.json
+
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
